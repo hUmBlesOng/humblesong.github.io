@@ -45,7 +45,7 @@
     <link href="http://yoursite.com/2020/01/09/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/2020/01/09/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</id>
     <published>2020-01-09T02:18:01.290Z</published>
-    <updated>2020-08-07T05:31:40.561Z</updated>
+    <updated>2020-08-07T05:41:59.186Z</updated>
     
     <content type="html"><![CDATA[<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"name"</span></span><br></pre></td></tr></table></figure><h3 id="快速提交"><a href="#快速提交" class="headerlink" title="快速提交"></a>快速提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure><a id="more"></a>]]></content>
     
