@@ -118,26 +118,9 @@
 
     <div class="post-content"><h1 id="Java浮点数精度丢失问题"><a href="#Java浮点数精度丢失问题" class="headerlink" title="Java浮点数精度丢失问题"></a>Java浮点数精度丢失问题</h1><h2 id="精度丢失示例"><a href="#精度丢失示例" class="headerlink" title="精度丢失示例"></a>精度丢失示例</h2><p>java做浮点数的除法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">double</span> k = (<span class="keyword">double</span>)a/b;</span><br><span class="line">    <span class="comment">// 四舍五入保留两位小数</span></span><br><span class="line">    <span class="keyword">double</span> i = <span class="keyword">new</span> BigDecimal(k).setScale(<span class="number">2</span>,java.math.BigDecimal.ROUND_HALF_UP).doubleValue();</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码输出的结果是这样的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7.000000000000001</span><br></pre></td></tr></table></figure>
-
-<p>还有另外一个的例子，如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="number">1.2</span> - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.19999999999999996</span><br></pre></td></tr></table></figure>
-
-<h2 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h2><p>出现这个问题的原因，这篇文章已经讲的很清楚了：<a href="https://www.cnblogs.com/backwords/p/9826773.html" target="_blank" rel="noopener">Java 浮点数精度丢失</a><br>简单来说，无论是十进制还是二进制，计算机对这些数进行计算的时候，都是通过不同精度单位的加权（即乘以系数）和来计算的，比如十进制的 <code>15.23</code> 就是 <code>1*10(1次方)+5*10(0次方)+2*10(-1次方)+0.03(-2次方)</code> 得来的，而二进制的 <code>10.101</code> 则是 <code>1*2(1次方)+0*2(0次方)+1*2(-1次方)+0*2(-2次方)+1*2(-3次方)</code> 得到的<br>而上面的 <code>1/15</code> 在计算机那边不能整除，得到结果 <code>0.06666667</code>，得到他的公式 <code>6*10(-2次方)+6*10(-2次方)+6*10(-2次方)+6*10(-2次方)...</code>，所以这个数字在计算机中出现了精度丢失，计算机只能无限接近这个数值，不能完全展示这个数字</p>
-<h2 id="java解决办法"><a href="#java解决办法" class="headerlink" title="java解决办法"></a>java解决办法</h2><p>推荐办法是直接使用 <code>java.math.BigDecimal</code> 类来进行计算，对于一些精度要求比较高的场景，比如金额交易场景下，还是强制使用 <code>BigDecimal</code> 的</p>
-<blockquote>
-<p>有可能你会问了，上面不是在浮点数计算完之后使用 <code>BigDecimal</code> 来转换保留小数了吗，为什么还会出现这种情况呢？<br>就是直接使用 <code>new BigDecimal(Double)</code> 构造函数来生成的话仍然会出现精度丢失问题，所以需要注意，使用 <code>BigDecimal</code> 时，一定要将数值先转换成 <strong>字符串</strong>，或者使用 <code>BigDecimal</code> 的 <code>valueOf</code> 方法<br>比如，直接存一个浮点数0.1 <code>BigDecimal b = new BigDecimal(0.1f);</code>，实际上存的数据是 <em>0.100000001490116119384765625</em></p>
-</blockquote>
-<p>那么接下来，我们最开始的错误代码，可以改成如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">double</span> k = (<span class="keyword">double</span>)a/b;</span><br><span class="line">    <span class="comment">// 四舍五入保留两位小数</span></span><br><span class="line">    <span class="keyword">double</span> i = BigDecimal().valueOf(k).setScale(<span class="number">2</span>,java.math.BigDecimal.ROUND_HALF_UP).doubleValue();</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后输出 <code>0.07</code></p>
-
+          <div class="read-more">
+            <a href="/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E6%8D%9F%E5%A4%B1%E9%97%AE%E9%A2%98/" class="read-more-link">阅读更多</a>
+          </div>
         </div></article>
       <article class="post">
     <header class="post-header">
