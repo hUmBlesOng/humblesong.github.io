@@ -107,19 +107,22 @@
         <div class="content-wrapper">
           <div id="content" class="content"><section id="posts" class="posts"><article class="post">
     <header class="post-header">
-      <h1 class="post-title"><a class="post-link" href="/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E6%8D%9F%E5%A4%B1%E9%97%AE%E9%A2%98/">Java浮点数精度损失问题</a>
+      <h1 class="post-title"><a class="post-link" href="/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/">Java浮点数精度丢失问题</a>
         </h1>
 
       <div class="post-meta">
         <span class="post-time">
           2020-08-14
-        </span></div>
+        </span><span class="post-category">
+            <a href="/categories/Java/">Java</a>
+            </span>
+        </div>
     </header>
 
-    <div class="post-content"><h1 id="Java浮点数精度丢失问题"><a href="#Java浮点数精度丢失问题" class="headerlink" title="Java浮点数精度丢失问题"></a>Java浮点数精度丢失问题</h1><h2 id="精度丢失示例"><a href="#精度丢失示例" class="headerlink" title="精度丢失示例"></a>精度丢失示例</h2><p>java做浮点数的除法</p>
+    <div class="post-content"><h2 id="精度丢失示例"><a href="#精度丢失示例" class="headerlink" title="精度丢失示例"></a>精度丢失示例</h2><p>java做浮点数的除法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">double</span> k = (<span class="keyword">double</span>)a/b;</span><br><span class="line">    <span class="comment">// 四舍五入保留两位小数</span></span><br><span class="line">    <span class="keyword">double</span> i = <span class="keyword">new</span> BigDecimal(k).setScale(<span class="number">2</span>,java.math.BigDecimal.ROUND_HALF_UP).doubleValue();</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <div class="read-more">
-            <a href="/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E6%8D%9F%E5%A4%B1%E9%97%AE%E9%A2%98/" class="read-more-link">阅读更多</a>
+            <a href="/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/" class="read-more-link">阅读更多</a>
           </div>
         </div></article>
       <article class="post">

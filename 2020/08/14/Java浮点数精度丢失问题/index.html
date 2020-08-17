@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="Java浮点数精度损失问题"/><link rel="alternate" href="/atom.xml" title="堕拉贡"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0" />
-<link rel="canonical" href="http://yoursite.com/2020/08/14/Java浮点数精度损失问题/"/>
+<meta name="description" content="Java浮点数精度丢失问题"/><meta name="keywords" content="Java, BigDecimal, 精度丢失, 堕拉贡" /><link rel="alternate" href="/atom.xml" title="堕拉贡"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0" />
+<link rel="canonical" href="http://yoursite.com/2020/08/14/Java浮点数精度丢失问题/"/>
 
 <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0" />
@@ -37,7 +37,7 @@
   window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-    <title>Java浮点数精度损失问题 - 堕拉贡</title>
+    <title>Java浮点数精度丢失问题 - 堕拉贡</title>
   <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="堕拉贡" type="application/atom+xml">
 </head>
 
@@ -107,21 +107,24 @@
         <div class="content-wrapper">
           <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">Java浮点数精度损失问题
+      <h1 class="post-title">Java浮点数精度丢失问题
         </h1>
 
       <div class="post-meta">
         <span class="post-time">
           2020-08-14
-        </span></div>
+        </span><span class="post-category">
+            <a href="/categories/Java/">Java</a>
+            </span>
+        </div>
     </header>
 
     <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java浮点数精度丢失问题"><span class="toc-text">Java浮点数精度丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#精度丢失示例"><span class="toc-text">精度丢失示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#出现原因"><span class="toc-text">出现原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java解决办法"><span class="toc-text">java解决办法</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#精度丢失示例"><span class="toc-text">精度丢失示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#出现原因"><span class="toc-text">出现原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java解决办法"><span class="toc-text">java解决办法</span></a></li></ol>
     </div>
-  </div><div class="post-content"><h1 id="Java浮点数精度丢失问题"><a href="#Java浮点数精度丢失问题" class="headerlink" title="Java浮点数精度丢失问题"></a>Java浮点数精度丢失问题</h1><h2 id="精度丢失示例"><a href="#精度丢失示例" class="headerlink" title="精度丢失示例"></a>精度丢失示例</h2><p>java做浮点数的除法</p>
+  </div><div class="post-content"><h2 id="精度丢失示例"><a href="#精度丢失示例" class="headerlink" title="精度丢失示例"></a>精度丢失示例</h2><p>java做浮点数的除法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">double</span> k = (<span class="keyword">double</span>)a/b;</span><br><span class="line">    <span class="comment">// 四舍五入保留两位小数</span></span><br><span class="line">    <span class="keyword">double</span> i = <span class="keyword">new</span> BigDecimal(k).setScale(<span class="number">2</span>,java.math.BigDecimal.ROUND_HALF_UP).doubleValue();</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>
@@ -148,6 +151,11 @@
       </div>
       
       <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Java/">Java</a>
+            <a href="/tags/BigDecimal/">BigDecimal</a>
+            <a href="/tags/%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1/">精度丢失</a>
+            </div>
         
         <nav class="post-nav"><a class="next" href="/2020/01/12/%E5%B0%8F%E8%80%81%E9%BC%A0/">
         <span class="next-text nav-default">小老鼠</span>
