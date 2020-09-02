@@ -89,12 +89,15 @@
 <meta property="og:url" content="http://yoursite.com/2020/09/02/Java%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%85%8B%E9%9A%86%E5%92%8C%E6%B5%85%E5%85%8B%E9%9A%86/index.html">
 <meta property="og:site_name" content="堕拉贡">
 <meta property="og:description" content="什么是克隆即将已有数据完全拷贝到一个新对象中。 深克隆和浅克隆在 java 中我们有基本数据类型（八大类型）以及引用数据类型。而这两种类型存放在内存中的位置是不同的，基本类型存放在栈中，而引用类型存放在堆中。 所以由于以上原因，出现了两种克隆方式，深克隆和浅克隆。">
+<meta property="og:image" content="https://i.loli.net/2020/09/02/iwYtaQmjhgUERex.png">
+<meta property="og:image" content="https://i.loli.net/2020/09/02/XCPit8Ego6Rs5S9.png">
 <meta property="article:published_time" content="2020-09-02T01:45:31.000Z">
-<meta property="article:modified_time" content="2020-09-02T01:59:14.283Z">
+<meta property="article:modified_time" content="2020-09-02T02:14:03.197Z">
 <meta property="article:author" content="hUmBlesOng">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="克隆">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/09/02/iwYtaQmjhgUERex.png">
 
 
 
@@ -374,8 +377,8 @@
 <p>在 <code>java</code> 中，每个实体类都是继承自 <code>java.lang.Object</code> 父类，<code>Object</code> 类有一个 <code>clone()</code> 方法，能够支持对象的克隆。<br>而通过 <code>clone()</code> 方法生成的对象和 <code>new</code> 出来的对象区别就是他保留着拷贝对象的属性值。</p>
 <p>我们先定义一个对象结构，a中引用了b，b引用了c。现在我们有一个A对象：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    B b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    C c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h3><p>浅克隆指拷贝对象的时候仅仅拷贝对象本身（包括基本类型变量），而不拷贝其中的引用类型变量。<br>比如，a 对象中有 b 引用类型变量，b 中有 c 引用类型变量。<br>之后浅克隆了 a 对象，得到 a1 对象，其中 a1 对象的变量 b 是直接引用的 a 对象中的 b 变量，而不是新建一个 b 变量。<br>![](<em>v</em>images/20200901223533696_22389.png =464x)</p>
-<h3 id="深克隆"><a href="#深克隆" class="headerlink" title="深克隆"></a>深克隆</h3><p>深克隆指拷贝对象的时候不仅拷贝对象本身（包括基本类型变量），而且同时拷贝其中的引用类型变量。<br>比如，a 对象中有 b 引用类型变量，b 中有 c 引用类型变量。<br>之后深克隆了 a 对象，得到 a1 对象，同时，内部的引用对象也进行了一次拷贝，a1 对象中的变量 b1 拷贝自 b 变量，c1 变量拷贝自 c 变量<br>![](<em>v</em>images/20200901224118510_6685.png =428x)</p>
+<h3 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h3><p>浅克隆指拷贝对象的时候仅仅拷贝对象本身（包括基本类型变量），而不拷贝其中的引用类型变量。<br>比如，a 对象中有 b 引用类型变量，b 中有 c 引用类型变量。<br>之后浅克隆了 a 对象，得到 a1 对象，其中 a1 对象的变量 b 是直接引用的 a 对象中的 b 变量，而不是新建一个 b 变量。<br><img src="https://i.loli.net/2020/09/02/iwYtaQmjhgUERex.png" alt="20200901223533696_22389.png"></p>
+<h3 id="深克隆"><a href="#深克隆" class="headerlink" title="深克隆"></a>深克隆</h3><p>深克隆指拷贝对象的时候不仅拷贝对象本身（包括基本类型变量），而且同时拷贝其中的引用类型变量。<br>比如，a 对象中有 b 引用类型变量，b 中有 c 引用类型变量。<br>之后深克隆了 a 对象，得到 a1 对象，同时，内部的引用对象也进行了一次拷贝，a1 对象中的变量 b1 拷贝自 b 变量，c1 变量拷贝自 c 变量<br><img src="https://i.loli.net/2020/09/02/XCPit8Ego6Rs5S9.png" alt="20200901224118510_6685.png"></p>
 <h2 id="如何实现克隆"><a href="#如何实现克隆" class="headerlink" title="如何实现克隆"></a>如何实现克隆</h2><p>我们可以手动 new 一个对象，然后将原来的值一个个的 set 进去，但是这样效率比较低，还有就是使用 clone 方法，使用 clone 需要满足以下条件：</p>
 <ol>
 <li>实现 <code>Cloneable</code> 接口</li>
