@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1. 精度丢失示例java做浮点数的除法 12345678public static void main(String[] args) &amp;#123;    int a &#x3D; 1;    int b &#x3D; 15;    double k &#x3D; (double)a&#x2F;b;    &#x2F;&#x2F; 四舍五入保留两位小数    double i &#x3D; new BigDecimal(k).setScale(2,java.math">
+  <meta name="description" content="概述SpringCache本身是一个缓存体系的抽象实现，并没有具体的缓存能力，要使用SpringCache还需要配合具体的缓存实现来完成。 下面我们以redis作为缓存来使用SpringCache 使用通用注解有如下几个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java浮点数精度丢失问题">
-<meta property="og:url" content="http://yoursite.com/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="Springboot利用AOP记录日志">
+<meta property="og:url" content="http://yoursite.com/2020/11/12/SpringCache%E6%94%AF%E6%8C%81%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4/index.html">
 <meta property="og:site_name" content="堕拉贡">
-<meta property="og:description" content="1. 精度丢失示例java做浮点数的除法 12345678public static void main(String[] args) &amp;#123;    int a &#x3D; 1;    int b &#x3D; 15;    double k &#x3D; (double)a&#x2F;b;    &#x2F;&#x2F; 四舍五入保留两位小数    double i &#x3D; new BigDecimal(k).setScale(2,java.math">
+<meta property="og:description" content="概述SpringCache本身是一个缓存体系的抽象实现，并没有具体的缓存能力，要使用SpringCache还需要配合具体的缓存实现来完成。 下面我们以redis作为缓存来使用SpringCache 使用通用注解有如下几个">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-08-14T10:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-17T09:15:21.918Z">
+<meta property="article:published_time" content="2020-11-12T08:43:43.000Z">
+<meta property="article:modified_time" content="2020-11-12T08:44:27.527Z">
 <meta property="article:author" content="hUmBlesOng">
 <meta property="article:tag" content="Java">
-<meta property="article:tag" content="BigDecimal">
-<meta property="article:tag" content="精度丢失">
+<meta property="article:tag" content="Springboot">
+<meta property="article:tag" content="SpringCache">
+<meta property="article:tag" content="缓存过期">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="http://yoursite.com/2020/11/12/SpringCache%E6%94%AF%E6%8C%81%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4/">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>Java浮点数精度丢失问题 | 堕拉贡</title>
+  <title>Springboot利用AOP记录日志 | 堕拉贡</title>
   
 
 
@@ -170,7 +171,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/12/SpringCache%E6%94%AF%E6%8C%81%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,7 +184,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java浮点数精度丢失问题
+          Springboot利用AOP记录日志
         </h1>
 
         <div class="post-meta">
@@ -192,16 +193,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-08-14 18:00:00" itemprop="dateCreated datePublished" datetime="2020-08-14T18:00:00+08:00">2020-08-14</time>
+              <time title="创建时间：2020-11-12 16:43:43 / 修改时间：16:44:27" itemprop="dateCreated datePublished" datetime="2020-11-12T16:43:43+08:00">2020-11-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-17 17:15:21" itemprop="dateModified" datetime="2020-08-17T17:15:21+08:00">2020-08-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -209,6 +204,10 @@
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Springboot/" itemprop="url" rel="index"><span itemprop="name">Springboot</span></a>
                 </span>
             </span>
 
@@ -228,8 +227,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/14/Java%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/11/12/SpringCache%E6%94%AF%E6%8C%81%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/12/SpringCache%E6%94%AF%E6%8C%81%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -244,29 +243,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-精度丢失示例"><a href="#1-精度丢失示例" class="headerlink" title="1. 精度丢失示例"></a>1. 精度丢失示例</h2><p>java做浮点数的除法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">double</span> k = (<span class="keyword">double</span>)a/b;</span><br><span class="line">    <span class="comment">// 四舍五入保留两位小数</span></span><br><span class="line">    <span class="keyword">double</span> i = <span class="keyword">new</span> BigDecimal(k).setScale(<span class="number">2</span>,java.math.BigDecimal.ROUND_HALF_UP).doubleValue();</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>SpringCache本身是一个缓存体系的抽象实现，并没有具体的缓存能力，要使用SpringCache还需要配合具体的缓存实现来完成。</p>
+<p>下面我们以redis作为缓存来使用SpringCache</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>通用注解有如下几个</p>
 <a id="more"></a>
 
-<p>上面的代码输出的结果是这样的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7.000000000000001</span><br></pre></td></tr></table></figure>
+<ul>
+<li>@EnableCaching：开启缓存功能</li>
+<li>@Cacheable：定义缓存，用于触发缓存</li>
+<li>@CachePut：定义更新缓存，触发缓存更新</li>
+<li>@CacheEvict：定义清除缓存，触发缓存清除</li>
+<li>@Caching：组合定义多种缓存功能</li>
+<li>@CacheConfig：定义公共设置，位于class之上</li>
+</ul>
+<p>这里举了一个例子，用来表示多参数的情况下该如何使用注解，其他的使用方法网上太多，不赘述</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Cacheable(value = CacheConstant.GOOD_LOVE_LIST, key = &quot;&#x27;u&#x27;+#currentUid+&#x27;p&#x27;+#page+&#x27;s&#x27;+#pageSize&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;GoodLoveVo&gt; <span class="title">list</span><span class="params">(Integer page, Integer pageSize, String currentUid)</span> </span>&#123;</span><br><span class="line">    PageHelper.startPage(page, pageSize);</span><br><span class="line">    <span class="keyword">return</span> XXmapper.selectAllByUid(currentUid);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>还有另外一个的例子，如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="number">1.2</span> - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.19999999999999996</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-出现原因"><a href="#2-出现原因" class="headerlink" title="2. 出现原因"></a>2. 出现原因</h2><p>出现这个问题的原因，这篇文章已经讲的很清楚了：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/backwords/p/9826773.html">Java 浮点数精度丢失</a><br>简单来说，无论是十进制还是二进制，计算机对这些数进行计算的时候，都是通过不同精度单位的加权（即乘以系数）和来计算的，比如十进制的 <code>15.23</code> 就是 <code>1*10(1次方)+5*10(0次方)+2*10(-1次方)+0.03(-2次方)</code> 得来的，而二进制的 <code>10.101</code> 则是 <code>1*2(1次方)+0*2(0次方)+1*2(-1次方)+0*2(-2次方)+1*2(-3次方)</code> 得到的<br>而上面的 <code>1/15</code> 在计算机那边不能整除，得到结果 <code>0.06666667</code>，得到他的公式 <code>6*10(-2次方)+6*10(-2次方)+6*10(-2次方)+6*10(-2次方)...</code>，所以这个数字在计算机中出现了精度丢失，计算机只能无限接近这个数值，不能完全展示这个数字</p>
-<h2 id="3-java解决办法"><a href="#3-java解决办法" class="headerlink" title="3. java解决办法"></a>3. java解决办法</h2><p>推荐办法是直接使用 <code>java.math.BigDecimal</code> 类来进行计算，对于一些精度要求比较高的场景，比如金额交易场景下，还是强制使用 <code>BigDecimal</code> 的</p>
 <blockquote>
-<p>有可能你会问了，上面不是在浮点数计算完之后使用 <code>BigDecimal</code> 来转换保留小数了吗，为什么还会出现这种情况呢？<br>就是直接使用 <code>new BigDecimal(Double)</code> 构造函数来生成的话仍然会出现精度丢失问题，所以需要注意，使用 <code>BigDecimal</code> 时，一定要将数值先转换成 <strong>字符串</strong>，或者使用 <code>BigDecimal</code> 的 <code>valueOf</code> 方法<br>比如，直接存一个浮点数0.1 <code>BigDecimal b = new BigDecimal(0.1f);</code>，实际上存的数据是 <em>0.100000001490116119384765625</em></p>
+<p>注意：在SpringBoot中使用SpringCache可以由自动配置功能来完成CacheManager的注册，SpringBoot会自动发现项目中拥有的缓存系统，而注册对应的缓存管理器，当然我们也可以手动指定。</p>
 </blockquote>
-<p>那么接下来，我们最开始的错误代码，可以改成如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">double</span> k = (<span class="keyword">double</span>)a/b;</span><br><span class="line">    <span class="comment">// 四舍五入保留两位小数</span></span><br><span class="line">    <span class="keyword">double</span> i = BigDecimal().valueOf(k).setScale(<span class="number">2</span>,java.math.BigDecimal.ROUND_HALF_UP).doubleValue();</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="支持过期时间"><a href="#支持过期时间" class="headerlink" title="支持过期时间"></a>支持过期时间</h2><p>我们上面有说SpringCache可以自动配置CacheManager，默认情况下是不支持过期时间的，所以我们需要手动配置</p>
+<p>我们定义一个 CacheConfig 类，用来配置CacheManager</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 🐥bys</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/11/5 16:04</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CacheConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String, String&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig()</span><br><span class="line">                <span class="comment">// 默认没有特殊指定的</span></span><br><span class="line">                .entryTtl(Duration.ofDays(<span class="number">1</span>))</span><br><span class="line">                <span class="comment">// 项目前缀</span></span><br><span class="line">                .computePrefixWith(cacheName -&gt; <span class="string">&quot;hs:&quot;</span> + cacheName);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 针对不同cacheName，设置不同的过期时间</span></span><br><span class="line">        Map&lt;String, RedisCacheConfiguration&gt; initialCacheConfiguration = <span class="keyword">new</span> HashMap&lt;String, RedisCacheConfiguration&gt;(<span class="number">1</span>) &#123;&#123;</span><br><span class="line"><span class="comment">//            put(&quot;demoCache&quot;, RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(1))); //1小时</span></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> RedisCacheManager.builder(redisTemplate.getConnectionFactory())</span><br><span class="line">                <span class="comment">// 默认配置（强烈建议配置上）。  比如动态创建出来的都会走此默认配置</span></span><br><span class="line">                .cacheDefaults(defaultCacheConfig)</span><br><span class="line">                <span class="comment">// 不同cache的个性化配置</span></span><br><span class="line">                .withInitialCacheConfigurations(initialCacheConfiguration)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>最后输出 <code>0.07</code></p>
+<p>这里面，我们可以通过 <code>.computePrefixWith</code> 配置 redis key 的前缀，设置 key 的默认过期时间</p>
+<p>那么如果我们想不走默认时间，想自定义怎么办呢，我们定义了一个 map，指定某个 key 的过期时间是多久，这里指定了 demoCache 这个 key 的过期时间是 1小时</p>
 
     </div>
 
@@ -277,8 +278,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/BigDecimal/" rel="tag"># BigDecimal</a>
-              <a href="/tags/%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1/" rel="tag"># 精度丢失</a>
+              <a href="/tags/Springboot/" rel="tag"># Springboot</a>
+              <a href="/tags/SpringCache/" rel="tag"># SpringCache</a>
+              <a href="/tags/%E7%BC%93%E5%AD%98%E8%BF%87%E6%9C%9F/" rel="tag"># 缓存过期</a>
           </div>
 
         
@@ -287,13 +289,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/01/12/%E5%B0%8F%E8%80%81%E9%BC%A0/" rel="prev" title="小老鼠">
-      <i class="fa fa-chevron-left"></i> 小老鼠
+    <a href="/2020/11/12/Springboot%E5%88%A9%E7%94%A8AOP%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97/" rel="prev" title="Springboot利用AOP记录日志">
+      <i class="fa fa-chevron-left"></i> Springboot利用AOP记录日志
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/09/02/Java%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%85%8B%E9%9A%86%E5%92%8C%E6%B5%85%E5%85%8B%E9%9A%86/" rel="next" title="Java中的深克隆和浅克隆">
-      Java中的深克隆和浅克隆 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -353,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 精度丢失示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%87%BA%E7%8E%B0%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">2. 出现原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-java%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3. java解决办法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="nav-number">3.</span> <span class="nav-text">支持过期时间</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
